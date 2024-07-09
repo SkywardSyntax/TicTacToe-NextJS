@@ -6,7 +6,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 .hr {
@@ -30,6 +30,7 @@
   font-size: 24px;
   cursor: pointer;
   transition: background-color 0.3s, transform 0.3s;
+  animation: squareAnimation 1s infinite;
 }
 
 .square:hover {
@@ -63,6 +64,7 @@
   position: relative;
   margin: 0 10px;
   transition: transform 0.3s;
+  animation: modeButtonAnimation 2s infinite;
 }
 
 .modeButton:hover {
@@ -120,6 +122,7 @@
   padding: 10px;
   border-radius: 10px;
   transition: background-color 0.3s, color 0.3s;
+  animation: resetButtonAnimation 3s infinite;
 }
 
 .resetButton:disabled {
