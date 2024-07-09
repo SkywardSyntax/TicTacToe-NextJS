@@ -1,9 +1,14 @@
 import { useState } from 'react';
 import styles from '../styles/home.module.css';
 
-function Square({ value, onClick }) {
+function Square({ value, onClick, onMouseEnter, onMouseLeave }) {
   return (
-    <button className={styles.square} onClick={onClick}>
+    <button
+      className={`${styles.square} ${value === 'X' ? styles.x : value === 'O' ? styles.o : ''}`}
+      onClick={onClick}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+    >
       {value}
     </button>
   );
@@ -12,6 +17,7 @@ function Square({ value, onClick }) {
 function Board() {
   const [squares, setSquares] = useState(Array(9).fill(null));
   const [xIsNext, setXIsNext] = useState(true);
+  const [hoverIndex, setHoverIndex] = useState(null);
 
   function handleClick(i) {
     const newSquares = squares.slice();
@@ -23,11 +29,21 @@ function Board() {
     setXIsNext(!xIsNext);
   }
 
+  function handleMouseEnter(i) {
+    setHoverIndex(i);
+  }
+
+  function handleMouseLeave() {
+    setHoverIndex(null);
+  }
+
   function renderSquare(i) {
     return (
       <Square
-        value={squares[i]}
+        value={squares[i] || (hoverIndex === i ? (xIsNext ? 'X' : 'O') : null)}
         onClick={() => handleClick(i)}
+        onMouseEnter={() => handleMouseEnter(i)}
+        onMouseLeave={handleMouseLeave}
       />
     );
   }
@@ -36,6 +52,8 @@ function Board() {
   let status;
   if (winner) {
     status = 'Winner: ' + winner;
+  } else if (squares.every(square => square !== null)) {
+    status = 'It\'s a tie!';
   } else {
     status = 'Next player: ' + (xIsNext ? 'X' : 'O');
   }
@@ -83,10 +101,30 @@ function calculateWinner(squares) {
 }
 
 function Home() {
+  const [darkMode, setDarkMode] = useState(false);
+
+  function toggleDarkMode() {
+    setDarkMode(!darkMode);
+  }
+
   return (
-    <main className={styles.main}>
+    <main className={`${styles.main} ${darkMode ? styles.dark : styles.light}`}>
       <h1>Tic Tac Toe</h1>
       <Board />
+      <div className={styles.modeSwitch}>
+        <button
+          className={`${styles.modeButton} ${darkMode ? styles.selected : ''}`}
+          onClick={toggleDarkMode}
+        >
+          🌜
+        </button>
+        <button
+          className={`${styles.modeButton} ${!darkMode ? styles.selected : ''}`}
+          onClick={toggleDarkMode}
+        >
+          🌞
+        </button>
+      </div>
     </main>
   );
 }

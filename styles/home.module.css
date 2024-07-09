@@ -2,10 +2,100 @@
   padding: 20px 20px 60px;
   max-width: 680px;
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
 }
 
 .hr {
   border: none;
   border-bottom: 1px solid #efefef;
   margin: 3em auto;
+}
+
+.boardRow {
+  display: flex;
+}
+
+.square {
+  width: 100px;
+  height: 100px;
+  background-color: #fff;
+  border: 1px solid #999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.square:hover {
+  background-color: #ddd;
+  transform: scale(1.1);
+}
+
+.x {
+  color: blue;
+}
+
+.o {
+  color: red;
+}
+
+.status {
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+
+.modeSwitch {
+  display: flex;
+  margin-top: 20px;
+}
+
+.modeButton {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  position: relative;
+  margin: 0 10px;
+  transition: transform 0.3s;
+}
+
+.modeButton:hover {
+  transform: scale(1.2);
+}
+
+.modeButton::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(5px);
+  border-radius: 50%;
+  transition: opacity 0.3s;
+}
+
+.modeButton.selected::before {
+  opacity: 0;
+}
+
+.modeButton:hover::before {
+  opacity: 0;
+}
+
+.dark {
+  background-color: #333;
+  color: #fff;
+}
+
+.light {
+  background-color: #fff;
+  color: #000;
 }
