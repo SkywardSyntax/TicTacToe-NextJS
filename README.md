@@ -11,3 +11,11 @@ npm run dev
 ```
 
 Open your browser and navigate to `http://localhost:3000` to start playing the game.
+
+## Features
+
+- Hashtag-shaped Tic Tac Toe board with only middle lines visible
+- Dark mode that makes the entire webpage dark
+- Light mode with beige/tan/cream/coffee colored background
+- "Tic Tac Toe" title, game board, game result, and reset button on frosted glass chips
+- Reset button that becomes red and clickable when the game ends (a win or a tie occurs)

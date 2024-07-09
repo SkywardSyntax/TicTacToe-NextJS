@@ -58,9 +58,14 @@ function Board() {
     status = 'Next player: ' + (xIsNext ? 'X' : 'O');
   }
 
+  function resetGame() {
+    setSquares(Array(9).fill(null));
+    setXIsNext(true);
+  }
+
   return (
     <div>
-      <div className={styles.status}>{status}</div>
+      <div className={`${styles.status} ${styles.frostedGlass}`}>{status}</div>
       <div className={styles.boardRow}>
         {renderSquare(0)}
         {renderSquare(1)}
@@ -76,6 +81,13 @@ function Board() {
         {renderSquare(7)}
         {renderSquare(8)}
       </div>
+      <button
+        className={`${styles.resetButton} ${winner || squares.every(square => square !== null) ? styles.red : ''}`}
+        onClick={resetGame}
+        disabled={!winner && !squares.every(square => square !== null)}
+      >
+        🔄 Reset
+      </button>
     </div>
   );
 }
@@ -109,8 +121,10 @@ function Home() {
 
   return (
     <main className={`${styles.main} ${darkMode ? styles.dark : styles.light}`}>
-      <h1>Tic Tac Toe</h1>
-      <Board />
+      <h1 className={styles.frostedGlass}>Tic Tac Toe</h1>
+      <div className={styles.frostedGlass}>
+        <Board />
+      </div>
       <div className={styles.modeSwitch}>
         <button
           className={`${styles.modeButton} ${darkMode ? styles.selected : ''}`}

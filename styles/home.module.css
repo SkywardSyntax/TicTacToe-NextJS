@@ -93,9 +93,42 @@
 .dark {
   background-color: #333;
   color: #fff;
+  width: 100%;
+  height: 100%;
 }
 
 .light {
-  background-color: #fff;
+  background-color: #d2b48c;
   color: #000;
+  width: 100%;
+  height: 100%;
+}
+
+.frostedGlass {
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(5px);
+  border-radius: 10px;
+  padding: 10px;
+  margin: 10px;
+}
+
+.resetButton {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 10px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.resetButton:disabled {
+  background-color: #ccc;
+  color: #999;
+  cursor: not-allowed;
+}
+
+.resetButton.red {
+  background-color: red;
+  color: white;
 }
