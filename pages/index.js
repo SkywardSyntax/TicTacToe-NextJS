@@ -66,17 +66,17 @@ function Board() {
   return (
     <div>
       <div className={`${styles.status} ${styles.frostedGlass}`}>{status}</div>
-      <div className={styles.boardRow}>
+      <div className={styles.grid}>
+        <div className={`${styles.gridLine} ${styles.horizontal}`}></div>
+        <div className={`${styles.gridLine} ${styles.horizontal}`}></div>
+        <div className={`${styles.gridLine} ${styles.vertical}`}></div>
+        <div className={`${styles.gridLine} ${styles.vertical}`}></div>
         {renderSquare(0)}
         {renderSquare(1)}
         {renderSquare(2)}
-      </div>
-      <div className={styles.boardRow}>
         {renderSquare(3)}
         {renderSquare(4)}
         {renderSquare(5)}
-      </div>
-      <div className={styles.boardRow}>
         {renderSquare(6)}
         {renderSquare(7)}
         {renderSquare(8)}
