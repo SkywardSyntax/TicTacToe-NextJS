@@ -142,3 +142,31 @@ body.dark-mode {
 * {
   box-sizing: border-box;
 }
+
+/* Additional styles for rounded 'X' symbol */
+.x {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 48px;
+  height: 48px;
+}
+
+.x::before,
+.x::after {
+  content: '';
+  position: absolute;
+  width: 6px;
+  height: 100%;
+  background-color: blue;
+  border-radius: 3px;
+}
+
+.x::before {
+  transform: rotate(45deg);
+}
+
+.x::after {
+  transform: rotate(-45deg);
+}
