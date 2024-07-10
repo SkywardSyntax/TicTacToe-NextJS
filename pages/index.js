@@ -9,7 +9,7 @@ function Square({ value, onClick, onMouseEnter, onMouseLeave }) {
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
     >
-      {value === 'X' ? <div className={styles.x}></div> : value === 'O' ? <div className={styles.o}></div> : null}
+      {value === 'X' ? <div className={styles.x}></div> : value === 'O' ? null : null}
     </button>
   );
 }
