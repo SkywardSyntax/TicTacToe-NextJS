@@ -55,7 +55,6 @@ function Board({ isDarkMode }) {
 
   if (winner) {
     status = 'Winner: ' + winner.player;
-    
   } else if (squares.every((square) => square !== null)) {
     status = "It's a tie!";
   } else {
@@ -68,40 +67,12 @@ function Board({ isDarkMode }) {
     } else {
       setWinningLine(null);
     }
-  }, [winner]); 
+  }, [winner]);
 
   function resetGame() {
     setSquares(Array(9).fill(null));
     setXIsNext(true);
     setWinningLine(null);
-  }
-
-  function drawWinningLine(line) {
-    if (!line) return null;
-
-    const [start, middle, end] = line;
-    const startRow = Math.floor(start / 3);
-    const startCol = start % 3;
-    const endRow = Math.floor(end / 3);
-    const endCol = end % 3;
-
-    const startX = (startCol * 106) + 53; 
-    const startY = (startRow * 106) + 53; 
-    const endX = (endCol * 106) + 53; 
-    const endY = (endRow * 106) + 53; 
-
-    const length = Math.sqrt(((endX - startX) ** 2) + ((endY - startY) ** 2));
-    const angle = Math.atan2(endY - startY, endX - startX) * (180 / Math.PI);
-
-    return (
-      <div
-        className={`${styles.animatedLine} ${isDarkMode ? styles.darkModeLine : ''}`}
-        style={{
-          width: `${length}px`,
-          transform: `translate(${startX}px, ${startY}px) rotate(${angle}deg)`, 
-        }}
-      ></div>
-    );
   }
 
   return (
@@ -123,7 +94,36 @@ function Board({ isDarkMode }) {
         {renderSquare(6)}
         {renderSquare(7)}
         {renderSquare(8)}
-        {drawWinningLine(winningLine)} 
+
+        {winningLine && ( 
+          <div
+            className={`${styles.animatedLine} ${
+              isDarkMode ? styles.darkModeLine : ''
+            }`}
+            style={{
+              width: `${Math.sqrt(
+                Math.pow((winningLine[1] % 3 - winningLine[0] % 3) * 106, 2) +
+                  Math.pow(
+                    Math.floor(winningLine[1] / 3) -
+                      Math.floor(winningLine[0] / 3) *
+                      106,
+                    2
+                  )
+              )}px`,
+              transform: `translate(${(winningLine[0] % 3) * 106 + 53}px, ${
+                Math.floor(winningLine[0] / 3) * 106 + 53
+              }px) rotate(${
+                (Math.atan(
+                  (Math.floor(winningLine[1] / 3) -
+                    Math.floor(winningLine[0] / 3)) /
+                  (winningLine[1] % 3 - winningLine[0] % 3)
+                ) *
+                  180) /
+                Math.PI
+              }deg)`,
+            }}
+          ></div>
+        )}
       </div>
       <button
         className={`${styles.resetButton} ${
@@ -152,11 +152,12 @@ function calculateWinner(squares) {
   for (let i = 0; i < lines.length; i++) {
     const [a, b, c] = lines[i];
     if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-      return { player: squares[a], line: [a, b, c] };
+      return { player: squares[a], line: [a, c] };
     }
   }
   return null;
 }
+
 function ModeSwitcher({ isDarkMode, toggleDarkMode }) {
   return (
     <div
@@ -197,7 +198,7 @@ function Home() {
     <main className={styles.main}>
       <h1 className={styles.frostedGlass}>Tic Tac Toe</h1>
       <div className={styles.frostedGlass}>
-        <Board isDarkMode={isDarkMode} /> {/* Pass isDarkMode here */}
+        <Board isDarkMode={isDarkMode} /> 
       </div>
       <ModeSwitcher isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} />
     </main>

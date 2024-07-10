@@ -1,11 +1,9 @@
-/* global.css */
-
-html, 
+html,
 body {
   margin: 0 !important;
   padding: 0 !important;
   width: 100%;
-  min-height: 100vh; 
+  min-height: 100vh;
 }
 
 body {
@@ -19,16 +17,16 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
-  hyphens: auto; 
+  hyphens: auto;
   margin: 0 !important;
   padding: 0 !important;
   width: 100%;
-  min-height: 100vh; 
+  min-height: 100vh;
   background-color: #d2b48c; /* tan */
 }
 
 /* Dark mode styles */
-html.dark-mode, 
+html.dark-mode,
 body.dark-mode {
   background-color: #333; /* dark gray */
   color: #fff; /* white text */
@@ -89,8 +87,6 @@ body.dark-mode {
 .mode-switcher {
   animation: switcherAnimation 1s infinite;
 }
-
-/* ... rest of your global.css styles */
 
 .frosted-glass {
   background: rgba(255, 255, 255, 0.5);
