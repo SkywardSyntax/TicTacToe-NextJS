@@ -23,7 +23,7 @@
 .square {
   width: 100px;
   height: 100px;
-  background-color: #fff;
+  background-color: transparent;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -31,6 +31,7 @@
   cursor: pointer;
   transition: background-color 0.3s, transform 0.3s;
   animation: squareAnimation 1s infinite;
+  border: none;
 }
 
 .square:hover {
@@ -135,6 +136,9 @@
   position: relative;
   width: 320px;
   height: 320px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
 }
 
 .gridLine {

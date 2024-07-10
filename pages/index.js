@@ -71,15 +71,21 @@ function Board() {
         <div className={`${styles.gridLine} ${styles.horizontal}`}></div>
         <div className={`${styles.gridLine} ${styles.vertical}`}></div>
         <div className={`${styles.gridLine} ${styles.vertical}`}></div>
-        {renderSquare(0)}
-        {renderSquare(1)}
-        {renderSquare(2)}
-        {renderSquare(3)}
-        {renderSquare(4)}
-        {renderSquare(5)}
-        {renderSquare(6)}
-        {renderSquare(7)}
-        {renderSquare(8)}
+        <div className={styles.boardRow}>
+          {renderSquare(0)}
+          {renderSquare(1)}
+          {renderSquare(2)}
+        </div>
+        <div className={styles.boardRow}>
+          {renderSquare(3)}
+          {renderSquare(4)}
+          {renderSquare(5)}
+        </div>
+        <div className={styles.boardRow}>
+          {renderSquare(6)}
+          {renderSquare(7)}
+          {renderSquare(8)}
+        </div>
       </div>
       <button
         className={`${styles.resetButton} ${winner || squares.every(square => square !== null) ? styles.red : ''}`}
