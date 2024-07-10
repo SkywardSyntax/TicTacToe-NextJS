@@ -79,7 +79,7 @@ function Board({ isDarkMode }) {
   function drawWinningLine(line) {
     if (!line) return null;
 
-    const [start, end] = line;
+    const [start, middle, end] = line;
     const startRow = Math.floor(start / 3);
     const startCol = start % 3;
     const endRow = Math.floor(end / 3);
@@ -152,7 +152,7 @@ function calculateWinner(squares) {
   for (let i = 0; i < lines.length; i++) {
     const [a, b, c] = lines[i];
     if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-      return { player: squares[a], line: [a, c] };
+      return { player: squares[a], line: [a, b, c] };
     }
   }
   return null;

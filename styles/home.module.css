@@ -187,6 +187,7 @@
   background-color: black; 
   transition: all 0.3s ease;
   z-index: 10; /* Ensure line is above other elements */
+  width: 318px; /* Adjusted to span the correct length for 3 elements */
 }
 
 .darkModeLine {
