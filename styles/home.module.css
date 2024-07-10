@@ -7,6 +7,7 @@
   align-items: center;
   justify-content: center;
   min-height: 100vh;
+  background-color: #d2b48c; /* tan */
 }
 
 .hr {
@@ -49,61 +50,6 @@
 .status {
   margin-bottom: 20px;
   font-size: 24px;
-}
-
-.modeSwitch {
-  display: flex;
-  margin-top: 20px;
-}
-
-.modeButton {
-  background: none;
-  border: none;
-  font-size: 24px;
-  cursor: pointer;
-  position: relative;
-  margin: 0 10px;
-  transition: transform 0.3s;
-  animation: modeButtonAnimation 2s infinite;
-}
-
-.modeButton:hover {
-  transform: scale(1.2);
-}
-
-.modeButton::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(255, 255, 255, 0.5);
-  backdrop-filter: blur(5px);
-  border-radius: 50%;
-  transition: opacity 0.3s;
-}
-
-.modeButton.selected::before {
-  opacity: 0;
-}
-
-.modeButton:hover::before {
-  opacity: 0;
-}
-
-.dark {
-  background-color: #333;
-  color: #fff;
-  width: 100vw; /* Added width */
-  height: 100%;
-}
-
-.light {
-  background-color: #d2b48c;
-  color: #000;
-  width: 100vw; /* Added width */
-  height: 100%;
 }
 
 .frostedGlass {

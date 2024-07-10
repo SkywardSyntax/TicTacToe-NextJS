@@ -113,31 +113,11 @@ function calculateWinner(squares) {
 }
 
 function Home() {
-  const [darkMode, setDarkMode] = useState(false);
-
-  function toggleDarkMode() {
-    setDarkMode(!darkMode);
-  }
-
   return (
-    <main className={`${styles.main} ${darkMode ? styles.dark : styles.light}`}>
+    <main className={styles.main}>
       <h1 className={styles.frostedGlass}>Tic Tac Toe</h1>
       <div className={styles.frostedGlass}>
         <Board />
-      </div>
-      <div className={styles.modeSwitch}>
-        <button
-          className={`${styles.modeButton} ${darkMode ? styles.selected : ''}`}
-          onClick={toggleDarkMode}
-        >
-          🌜
-        </button>
-        <button
-          className={`${styles.modeButton} ${!darkMode ? styles.selected : ''}`}
-          onClick={toggleDarkMode}
-        >
-          🌞
-        </button>
       </div>
     </main>
   );

@@ -25,23 +25,10 @@ body {
   padding: 0 !important;
   width: 100%;
   min-height: 100vh; 
+  background-color: #d2b48c; /* tan */
 }
 
 /* ... rest of your global.css styles */
-
-.dark {
-  background-color: #333;
-  color: #fff;
-  height: 100%;
-  min-height: 100vh; 
-}
-
-.light {
-  background-color: #d2b48c;
-  color: #000;
-  height: 100%;
-  min-height: 100vh; 
-}
 
 .frosted-glass {
   background: rgba(255, 255, 255, 0.5);
