@@ -8,7 +8,6 @@ body {
   min-height: 100vh; 
 }
 
-
 body {
   font-family: 'SF Pro Text', 'SF Pro Icons', 'Helvetica Neue', 'Helvetica',
     'Arial', sans-serif;
@@ -26,6 +25,69 @@ body {
   width: 100%;
   min-height: 100vh; 
   background-color: #d2b48c; /* tan */
+}
+
+/* Dark mode styles */
+html.dark-mode, 
+body.dark-mode {
+  background-color: #333; /* dark gray */
+  color: #fff; /* white text */
+}
+
+/* Dark mode frosted glass effect */
+.frosted-glass.dark-mode {
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+}
+
+/* Switcher styles */
+.mode-switcher {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(5px);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.mode-switcher.dark-mode {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.mode-switcher .icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: #fff; /* white circle for light mode */
+  transition: all 0.3s ease;
+}
+
+.mode-switcher.dark-mode .icon {
+  background-color: #000; /* black circle for dark mode */
+}
+
+/* Switcher animation */
+@keyframes switcherAnimation {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.mode-switcher {
+  animation: switcherAnimation 1s infinite;
 }
 
 /* ... rest of your global.css styles */

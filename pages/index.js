@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styles from '../styles/home.module.css';
 
 function Square({ value, onClick, onMouseEnter, onMouseLeave }) {
@@ -112,13 +112,47 @@ function calculateWinner(squares) {
   return null;
 }
 
+function ModeSwitcher({ isDarkMode, toggleDarkMode }) {
+  return (
+    <div
+      className={`${styles.modeSwitcher} ${isDarkMode ? styles.darkMode : ''}`}
+      onClick={toggleDarkMode}
+    >
+      <div className={styles.icon}></div>
+    </div>
+  );
+}
+
 function Home() {
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  useEffect(() => {
+    const savedMode = localStorage.getItem('darkMode');
+    if (savedMode) {
+      setIsDarkMode(savedMode === 'true');
+    }
+  }, []);
+
+  useEffect(() => {
+    if (isDarkMode) {
+      document.documentElement.classList.add('dark-mode');
+    } else {
+      document.documentElement.classList.remove('dark-mode');
+    }
+    localStorage.setItem('darkMode', isDarkMode);
+  }, [isDarkMode]);
+
+  const toggleDarkMode = () => {
+    setIsDarkMode(!isDarkMode);
+  };
+
   return (
     <main className={styles.main}>
       <h1 className={styles.frostedGlass}>Tic Tac Toe</h1>
       <div className={styles.frostedGlass}>
         <Board />
       </div>
+      <ModeSwitcher isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} />
     </main>
   );
 }

@@ -81,3 +81,53 @@
   background-color: red;
   color: white;
 }
+
+/* Dark and light mode switcher styles */
+.modeSwitcher {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(5px);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.modeSwitcher.darkMode {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.modeSwitcher .icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: #fff; /* white circle for light mode */
+  transition: all 0.3s ease;
+}
+
+.modeSwitcher.darkMode .icon {
+  background-color: #000; /* black circle for dark mode */
+}
+
+/* Switcher animation */
+@keyframes switcherAnimation {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.modeSwitcher {
+  animation: switcherAnimation 1s infinite;
+}
