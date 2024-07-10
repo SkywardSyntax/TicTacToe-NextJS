@@ -106,12 +106,12 @@
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  background-color: #fff; /* white circle for light mode */
+  background-color: #000; /* black circle for light mode */
   transition: all 0.3s ease;
 }
 
 .modeSwitcher.darkMode .icon {
-  background-color: #000; /* black circle for dark mode */
+  background-color: #fff; /* white circle for dark mode */
 }
 
 /* Switcher animation */
