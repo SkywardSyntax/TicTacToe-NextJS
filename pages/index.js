@@ -14,7 +14,7 @@ function Square({ value, onClick, onMouseEnter, onMouseLeave }) {
   );
 }
 
-function Board() {
+function Board({ isDarkMode }) {
   const [squares, setSquares] = useState(Array(9).fill(null));
   const [xIsNext, setXIsNext] = useState(true);
   const [hoverIndex, setHoverIndex] = useState(null);
