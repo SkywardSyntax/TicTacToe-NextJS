@@ -198,3 +198,8 @@
 .gridLine.vertical:nth-child(4) {
   left: 66.66%;
 }
+
+/* Hide the smaller Arial font version of X and O */
+.square > div {
+  font-size: 0;
+}
