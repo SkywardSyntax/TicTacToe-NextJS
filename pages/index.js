@@ -9,7 +9,7 @@ function Square({ value, onClick, onMouseEnter, onMouseLeave }) {
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
     >
-      {value === 'X' ? <div className={styles.x}></div> : null} 
+      {value === 'X' ? <div className={styles.x}></div> : null}
     </button>
   );
 }
@@ -22,7 +22,7 @@ function Board({ isDarkMode }) {
 
   function handleClick(i) {
     if (calculateWinner(squares) || squares[i]) {
-      return; 
+      return;
     }
 
     const newSquares = squares.slice();
@@ -75,11 +75,18 @@ function Board({ isDarkMode }) {
     setWinningLine(null);
   }
 
+  // Calculate SVG line coordinates
+  const squareSize = 106;
+  const lineCoordinates = winningLine
+    ? [
+        [(winningLine[0] % 3) * squareSize + squareSize / 2, Math.floor(winningLine[0] / 3) * squareSize + squareSize / 2], // Start point
+        [(winningLine[1] % 3) * squareSize + squareSize / 2, Math.floor(winningLine[1] / 3) * squareSize + squareSize / 2], // End point
+      ]
+    : null;
+
   return (
     <div>
-      <div className={`${styles.status} ${styles.frostedGlass}`}>
-        {status}
-      </div>
+      <div className={`${styles.status} ${styles.frostedGlass}`}>{status}</div>
       <div className={styles.grid}>
         <div className={`${styles.gridLine} ${styles.horizontal}`}></div>
         <div className={`${styles.gridLine} ${styles.horizontal}`}></div>
@@ -95,40 +102,22 @@ function Board({ isDarkMode }) {
         {renderSquare(7)}
         {renderSquare(8)}
 
-        {winningLine && ( 
-          <div
-            className={`${styles.animatedLine} ${
-              isDarkMode ? styles.darkModeLine : ''
-            }`}
-            style={{
-              width: `${Math.sqrt(
-                Math.pow((winningLine[1] % 3 - winningLine[0] % 3) * 106, 2) +
-                  Math.pow(
-                    Math.floor(winningLine[1] / 3) -
-                      Math.floor(winningLine[0] / 3) *
-                      106,
-                    2
-                  )
-              )}px`,
-              transform: `translate(${(winningLine[0] % 3) * 106 + 53}px, ${
-                Math.floor(winningLine[0] / 3) * 106 + 53
-              }px) rotate(${
-                (Math.atan(
-                  (Math.floor(winningLine[1] / 3) -
-                    Math.floor(winningLine[0] / 3)) /
-                  (winningLine[1] % 3 - winningLine[0] % 3)
-                ) *
-                  180) /
-                Math.PI
-              }deg)`,
-            }}
-          ></div>
+        {/* SVG for the winning line */}
+        {winningLine && (
+          <svg className={styles.winningLine} width="320" height="320">
+            <line 
+              x1={lineCoordinates[0][0]} 
+              y1={lineCoordinates[0][1]} 
+              x2={lineCoordinates[1][0]} 
+              y2={lineCoordinates[1][1]} 
+              stroke={isDarkMode ? 'white' : 'black'} 
+              strokeWidth="4" 
+            />
+          </svg>
         )}
       </div>
       <button
-        className={`${styles.resetButton} ${
-          winner || squares.every((square) => square !== null) ? styles.red : ''
-        }`}
+        className={`${styles.resetButton} ${winner || squares.every((square) => square !== null) ? styles.red : ''}`}
         onClick={resetGame}
         disabled={!winner && !squares.every((square) => square !== null)}
       >
@@ -137,6 +126,7 @@ function Board({ isDarkMode }) {
     </div>
   );
 }
+
 
 function calculateWinner(squares) {
   const lines = [

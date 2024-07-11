@@ -31,7 +31,7 @@
   cursor: pointer;
   transition: background-color 0.3s;
   animation: squareAnimation 1s infinite;
-  border: none; 
+  border: none;
 }
 
 .x {
@@ -180,24 +180,19 @@
   left: 66.66%;
 }
 
-/* Animated Line Styles */
-.animatedLine {
+/* Winning Line (SVG) */
+.winningLine {
   position: absolute;
-  height: 4px;
-  background-color: black; 
-  transition: all 0.3s ease;
-  z-index: 10; /* Ensure line is above other elements */
-  width: 0; /* Start with width 0 for animation */
-}
-
-.darkModeLine {
-  background-color: white;
+  top: 0;
+  left: 0;
+  pointer-events: none; /* Prevent line from interfering with clicks */
 }
 
 @keyframes drawLine {
   0% {
-    width: 0; 
+    width: 0;
   }
+
   100% {
     width: 100%;
   }
