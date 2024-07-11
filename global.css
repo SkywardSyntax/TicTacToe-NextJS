@@ -178,3 +178,16 @@ html.dark-mode .animated-line,
 body.dark-mode .animated-line {
   background-color: white;
 }
+
+/* Keyframe animation for pulsating effect */
+@keyframes pulsate {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}

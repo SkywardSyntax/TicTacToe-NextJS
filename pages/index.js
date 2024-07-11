@@ -140,7 +140,7 @@ function Board({ isDarkMode, scores, setScores }) {
         )}
       </div>
       <button
-        className={`${styles.resetButton} ${winner || squares.every((square) => square !== null) ? styles.red : ''}`}
+        className={`${styles.resetButton} ${winner || squares.every((square) => square !== null) ? `${styles.red} ${styles.pulsate}` : ''}`}
         onClick={resetGame}
         disabled={!winner && !squares.every((square) => square !== null)}
       >
