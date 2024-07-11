@@ -14,7 +14,7 @@ function Square({ value, onClick, onMouseEnter, onMouseLeave }) {
   );
 }
 
-function Board({ isDarkMode, scores, setScores }) {
+function Board({ isDarkMode, scores, setScores, incrementGameCount }) {
   const [squares, setSquares] = useState(Array(9).fill(null));
   const [xIsNext, setXIsNext] = useState(true);
   const [hoverIndex, setHoverIndex] = useState(null);
@@ -70,11 +70,15 @@ function Board({ isDarkMode, scores, setScores }) {
         [winner.player]: prevScores[winner.player] + 1,
       }));
       setScoreUpdated(true);
+      incrementGameCount();
+    } else if (!winner && squares.every((square) => square !== null) && !scoreUpdated) {
+      setScoreUpdated(true);
+      incrementGameCount();
     } else if (!winner) {
       setWinningLine(null);
       setScoreUpdated(false);
     }
-  }, [winner, setScores, scoreUpdated]);
+  }, [winner, setScores, scoreUpdated, incrementGameCount, squares]);
 
   function resetGame() {
     setSquares(Array(9).fill(null));
@@ -198,6 +202,7 @@ function ScoreBoard({ scores }) {
 function Home() {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [scores, setScores] = useState({ X: 0, O: 0 });
+  const [gameCount, setGameCount] = useState(0);
 
   useEffect(() => {
     const savedMode = localStorage.getItem('darkMode');
@@ -221,13 +226,20 @@ function Home() {
     setIsDarkMode(!isDarkMode);
   };
 
+  const incrementGameCount = () => {
+    setGameCount((prevCount) => prevCount + 1);
+  };
+
   return (
     <main className={styles.main}>
       <h1 className={styles.frostedGlass}>Tic Tac Toe</h1>
       <div className={styles.frostedGlass}>
-        <Board isDarkMode={isDarkMode} scores={scores} setScores={setScores} /> 
+        <Board isDarkMode={isDarkMode} scores={scores} setScores={setScores} incrementGameCount={incrementGameCount} /> 
       </div>
       <ScoreBoard scores={scores} />
+      <div className={`${styles.scoreBoard} ${styles.frostedGlass}`}>
+        <div>Games Played: {gameCount}</div>
+      </div>
       <ModeSwitcher isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} />
     </main>
   );
