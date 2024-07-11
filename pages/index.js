@@ -35,6 +35,10 @@ function Board({ isDarkMode, scores, setScores, incrementGameCount, setTies }) {
     setHoverIndex(i);
   }
 
+  function handleMouseLeave() {
+    setHoverIndex(null);
+  }
+
   function renderSquare(i) {
     return (
       <Square
@@ -109,7 +113,7 @@ function Board({ isDarkMode, scores, setScores, incrementGameCount, setTies }) {
   return (
     <div>
       <div className={`${styles.status} ${styles.frostedGlass}`}>{status}</div>
-      <div className={styles.grid}>
+      <div className={styles.grid} onMouseLeave={handleMouseLeave}>
         <div className={`${styles.gridLine} ${styles.horizontal}`}></div>
         <div className={`${styles.gridLine} ${styles.horizontal}`}></div>
         <div className={`${styles.gridLine} ${styles.vertical}`}></div>
