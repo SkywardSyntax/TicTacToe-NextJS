@@ -14,22 +14,11 @@ function Square({ value, onClick, onMouseEnter, onMouseLeave }) {
   );
 }
 
-function ScoreBoard({ scores }) {
-  return (
-    <div className={`${styles.scoreBoard} ${styles.frostedGlass}`}>
-      <div>Score</div>
-      <div>X: {scores.X}</div>
-      <div>O: {scores.O}</div>
-    </div>
-  );
-}
-
 function Board({ isDarkMode, scores, setScores }) {
   const [squares, setSquares] = useState(Array(9).fill(null));
   const [xIsNext, setXIsNext] = useState(true);
   const [hoverIndex, setHoverIndex] = useState(null);
   const [winningLine, setWinningLine] = useState(null);
-  const [gameWon, setGameWon] = useState(false);
 
   function handleClick(i) {
     if (calculateWinner(squares) || squares[i]) {
@@ -73,23 +62,21 @@ function Board({ isDarkMode, scores, setScores }) {
   }
 
   useEffect(() => {
-    if (winner && !gameWon) {
+    if (winner) {
       setWinningLine(winner.line);
       setScores((prevScores) => ({
         ...prevScores,
         [winner.player]: prevScores[winner.player] + 1,
       }));
-      setGameWon(true);
     } else {
       setWinningLine(null);
     }
-  }, [winner, setScores, gameWon]);
+  }, [winner, setScores]);
 
   function resetGame() {
     setSquares(Array(9).fill(null));
     setXIsNext(true);
     setWinningLine(null);
-    setGameWon(false);
   }
 
   // Calculate SVG line coordinates
@@ -176,6 +163,15 @@ function ModeSwitcher({ isDarkMode, toggleDarkMode }) {
   );
 }
 
+function ScoreBoard({ scores }) {
+  return (
+    <div className={`${styles.scoreBoard} ${styles.frostedGlass}`}>
+      <div>Player X: {scores.X}</div>
+      <div>Player O: {scores.O}</div>
+    </div>
+  );
+}
+
 function Home() {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [scores, setScores] = useState({ X: 0, O: 0 });
@@ -205,10 +201,10 @@ function Home() {
   return (
     <main className={styles.main}>
       <h1 className={styles.frostedGlass}>Tic Tac Toe</h1>
-      <ScoreBoard scores={scores} />
       <div className={styles.frostedGlass}>
         <Board isDarkMode={isDarkMode} scores={scores} setScores={setScores} /> 
       </div>
+      <ScoreBoard scores={scores} />
       <ModeSwitcher isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} />
     </main>
   );
