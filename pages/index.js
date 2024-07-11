@@ -63,20 +63,18 @@ function Board({ isDarkMode, scores, setScores, incrementGameCount }) {
   }
 
   useEffect(() => {
-    if (winner && !scoreUpdated) {
-      setWinningLine(winner.line);
-      setScores((prevScores) => ({
-        ...prevScores,
-        [winner.player]: prevScores[winner.player] + 1,
-      }));
-      setScoreUpdated(true);
-      incrementGameCount();
-    } else if (!winner && squares.every((square) => square !== null) && !scoreUpdated) {
+    if ((winner || squares.every((square) => square !== null)) && !scoreUpdated) {
+      if (winner) {
+        setWinningLine(winner.line);
+        setScores((prevScores) => ({
+          ...prevScores,
+          [winner.player]: prevScores[winner.player] + 1,
+        }));
+      }
       setScoreUpdated(true);
       incrementGameCount();
     } else if (!winner) {
       setWinningLine(null);
-      setScoreUpdated(false);
     }
   }, [winner, setScores, scoreUpdated, incrementGameCount, squares]);
 
