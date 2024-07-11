@@ -121,10 +121,12 @@
   justify-content: center;
   cursor: pointer;
   transition: all 0.3s ease;
+  animation: switcherAnimation 1s infinite;
 }
 
 .modeSwitcher.darkMode {
   background: rgba(0, 0, 0, 0.5);
+  animation: switcherAnimation 1s infinite;
 }
 
 .modeSwitcher .icon {
