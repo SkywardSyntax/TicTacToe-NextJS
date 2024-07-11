@@ -14,7 +14,7 @@ function Square({ value, onClick, onMouseEnter, onMouseLeave }) {
   );
 }
 
-function Board({ isDarkMode, scores, setScores, incrementGameCount }) {
+function Board({ isDarkMode, scores, setScores, incrementGameCount, setTies }) {
   const [squares, setSquares] = useState(Array(9).fill(null));
   const [xIsNext, setXIsNext] = useState(true);
   const [hoverIndex, setHoverIndex] = useState(null);
@@ -70,13 +70,15 @@ function Board({ isDarkMode, scores, setScores, incrementGameCount }) {
           ...prevScores,
           [winner.player]: prevScores[winner.player] + 1,
         }));
+      } else {
+        setTies((prevTies) => prevTies + 1);
       }
       setScoreUpdated(true);
       incrementGameCount();
     } else if (!winner) {
       setWinningLine(null);
     }
-  }, [winner, setScores, scoreUpdated, incrementGameCount, squares]);
+  }, [winner, setScores, scoreUpdated, incrementGameCount, squares, setTies]);
 
   function resetGame() {
     setSquares(Array(9).fill(null));
@@ -184,11 +186,14 @@ function ModeSwitcher({ isDarkMode, toggleDarkMode }) {
   );
 }
 
-function ScoreBoard({ scores }) {
+function ScoreBoard({ scores, ties }) {
   return (
     <div className={styles.scoreBoardContainer}>
       <div className={`${styles.scoreBoard} ${styles.frostedGlass}`}>
         <div>Player X: {scores.X}</div>
+      </div>
+      <div className={`${styles.tieScoreBoard} ${styles.frostedGlass}`}>
+        <div>Ties: {ties}</div>
       </div>
       <div className={`${styles.scoreBoard} ${styles.frostedGlass}`}>
         <div>Player O: {scores.O}</div>
@@ -201,6 +206,7 @@ function Home() {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [scores, setScores] = useState({ X: 0, O: 0 });
   const [gameCount, setGameCount] = useState(0);
+  const [ties, setTies] = useState(0);
 
   useEffect(() => {
     const savedMode = localStorage.getItem('darkMode');
@@ -232,9 +238,9 @@ function Home() {
     <main className={styles.main}>
       <h1 className={styles.frostedGlass}>Tic Tac Toe</h1>
       <div className={styles.frostedGlass}>
-        <Board isDarkMode={isDarkMode} scores={scores} setScores={setScores} incrementGameCount={incrementGameCount} /> 
+        <Board isDarkMode={isDarkMode} scores={scores} setScores={setScores} incrementGameCount={incrementGameCount} setTies={setTies} /> 
       </div>
-      <ScoreBoard scores={scores} />
+      <ScoreBoard scores={scores} ties={ties} />
       <div className={`${styles.scoreBoard} ${styles.frostedGlass}`}>
         <div>Games Played: {gameCount}</div>
       </div>
