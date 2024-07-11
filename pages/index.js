@@ -184,9 +184,13 @@ function ModeSwitcher({ isDarkMode, toggleDarkMode }) {
 
 function ScoreBoard({ scores }) {
   return (
-    <div className={`${styles.scoreBoard} ${styles.frostedGlass}`}>
-      <div>Player X: {scores.X}</div>
-      <div>Player O: {scores.O}</div>
+    <div className={styles.scoreBoardContainer}>
+      <div className={`${styles.scoreBoard} ${styles.frostedGlass}`}>
+        <div>Player X: {scores.X}</div>
+      </div>
+      <div className={`${styles.scoreBoard} ${styles.frostedGlass}`}>
+        <div>Player O: {scores.O}</div>
+      </div>
     </div>
   );
 }

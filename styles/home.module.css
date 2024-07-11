@@ -222,10 +222,16 @@
   }
 }
 
-.scoreBoard {
+.scoreBoardContainer {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   width: 100%;
   margin-top: 20px;
+}
+
+.scoreBoard {
+  display: flex;
+  justify-content: center;
+  width: 45%;
   font-size: 20px;
 }
