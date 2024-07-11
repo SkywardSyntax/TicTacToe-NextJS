@@ -29,8 +29,7 @@ function Board({ isDarkMode, scores, setScores }) {
   const [xIsNext, setXIsNext] = useState(true);
   const [hoverIndex, setHoverIndex] = useState(null);
   const [winningLine, setWinningLine] = useState(null);
-  const [xWins, setXWins] = useState(0);
-  const [oWins, setOWins] = useState(0);
+  const [gameWon, setGameWon] = useState(false);
 
   function handleClick(i) {
     if (calculateWinner(squares) || squares[i]) {
@@ -74,28 +73,23 @@ function Board({ isDarkMode, scores, setScores }) {
   }
 
   useEffect(() => {
-    if (winner) {
+    if (winner && !gameWon) {
       setWinningLine(winner.line);
       setScores((prevScores) => ({
         ...prevScores,
         [winner.player]: prevScores[winner.player] + 1,
       }));
-      if (winner.player === 'X') {
-        setXWins(xWins + 1);
-      } else if (winner.player === 'O') {
-        setOWins(oWins + 1);
-      }
+      setGameWon(true);
     } else {
       setWinningLine(null);
     }
-  }, [winner, setScores, xWins, oWins]);
+  }, [winner, setScores, gameWon]);
 
   function resetGame() {
     setSquares(Array(9).fill(null));
     setXIsNext(true);
     setWinningLine(null);
-    setXWins(0);
-    setOWins(0);
+    setGameWon(false);
   }
 
   // Calculate SVG line coordinates
