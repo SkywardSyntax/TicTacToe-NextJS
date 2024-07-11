@@ -221,3 +221,20 @@
     background-color: red;
   }
 }
+
+.scoreBoard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(5px);
+}
+
+.scoreBoard div {
+  margin: 5px 0;
+}
