@@ -1,13 +1,12 @@
 import { useState, useEffect } from 'react';
 import styles from '../styles/home.module.css';
 
-function Square({ value, onClick, onMouseEnter, onMouseLeave, isHovered }) {
+function Square({ value, onClick, onMouseMove, isHovered }) {
   return (
     <button
       className={`${styles.square} ${value === 'X' ? styles.x : value === 'O' ? styles.o : ''} ${isHovered ? (value === 'X' ? styles.hoverX : styles.hoverO) : ''}`}
       onClick={onClick}
-      onMouseEnter={onMouseEnter}
-      onMouseLeave={onMouseLeave}
+      onMouseMove={onMouseMove}
     >
       {value === 'X' ? <div className={styles.x}></div> : null}
     </button>
@@ -32,12 +31,8 @@ function Board({ isDarkMode, scores, setScores, incrementGameCount, setTies }) {
     setXIsNext(!xIsNext);
   }
 
-  function handleMouseEnter(i) {
+  function handleMouseMove(i) {
     setHoverIndex(i);
-  }
-
-  function handleMouseLeave() {
-    setHoverIndex(null);
   }
 
   function renderSquare(i) {
@@ -45,8 +40,7 @@ function Board({ isDarkMode, scores, setScores, incrementGameCount, setTies }) {
       <Square
         value={squares[i] || (hoverIndex === i ? (xIsNext ? 'X' : 'O') : null)}
         onClick={() => handleClick(i)}
-        onMouseEnter={() => handleMouseEnter(i)}
-        onMouseLeave={handleMouseLeave}
+        onMouseMove={() => handleMouseMove(i)}
         isHovered={hoverIndex === i}
       />
     );

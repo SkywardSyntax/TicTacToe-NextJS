@@ -32,6 +32,7 @@
   transition: background-color 0.3s, opacity 0.3s;
   animation: squareAnimation 1s infinite;
   border: none;
+  padding: 10px;
 }
 
 .x {
