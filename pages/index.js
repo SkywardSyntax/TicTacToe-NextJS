@@ -85,10 +85,25 @@ function Board({ isDarkMode, scores, setScores }) {
 
   // Calculate SVG line coordinates
   const squareSize = 106;
+  const boardSize = 320;
   const lineCoordinates = winningLine
     ? [
         [(winningLine[0] % 3) * squareSize + squareSize / 2, Math.floor(winningLine[0] / 3) * squareSize + squareSize / 2], // Start point
         [(winningLine[1] % 3) * squareSize + squareSize / 2, Math.floor(winningLine[1] / 3) * squareSize + squareSize / 2], // End point
+      ]
+    : null;
+
+  // Extend the line coordinates beyond the board
+  const extendedLineCoordinates = lineCoordinates
+    ? [
+        [
+          lineCoordinates[0][0] - (lineCoordinates[1][0] - lineCoordinates[0][0]) * 0.1,
+          lineCoordinates[0][1] - (lineCoordinates[1][1] - lineCoordinates[0][1]) * 0.1,
+        ],
+        [
+          lineCoordinates[1][0] + (lineCoordinates[1][0] - lineCoordinates[0][0]) * 0.1,
+          lineCoordinates[1][1] + (lineCoordinates[1][1] - lineCoordinates[0][1]) * 0.1,
+        ],
       ]
     : null;
 
@@ -114,10 +129,10 @@ function Board({ isDarkMode, scores, setScores }) {
         {winningLine && (
           <svg className={styles.winningLine} width="320" height="320">
             <line 
-              x1={lineCoordinates[0][0]} 
-              y1={lineCoordinates[0][1]} 
-              x2={lineCoordinates[1][0]} 
-              y2={lineCoordinates[1][1]} 
+              x1={extendedLineCoordinates[0][0]} 
+              y1={extendedLineCoordinates[0][1]} 
+              x2={extendedLineCoordinates[1][0]} 
+              y2={extendedLineCoordinates[1][1]} 
               stroke={isDarkMode ? 'white' : 'black'} 
               strokeWidth="4" 
             />
