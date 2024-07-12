@@ -2,6 +2,14 @@
 
 This repository contains a basic tic tac toe game for 2 players implemented using Next.js components.
 
+## How to View the Application
+
+You can view the application running at [skywardsyntx.github.io/TicTacToe-NextJS](https://skywardsyntx.github.io/TicTacToe-NextJS).
+
+## Introduction to Next JS
+
+This application was my introduction project to Next JS.
+
 ## How to Run
 
 To run this application:
