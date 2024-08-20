@@ -30,3 +30,6 @@ Open your browser and navigate to `http://localhost:3000` to start playing the g
 - New `scoreUpdated` state variable to track if the score has been updated
 - Game counter to track the number of games played
 - Tie score tracking
+
+## Demo
+![demo](demo.png)
